@@ -1,0 +1,13 @@
+**Agromaticafy - Sistema POS Profesional**
+
+**Desarrollado por Ang Kosal (Original) / Mejorado por Antigravity AI**
+
+---Admin Login Details---
+
+Email   : admin@mail.com
+Password: codeastro.com
+
+---NOTAS DE LA VERSIÓN---
+- Sistema traducido completamente al Español.
+- Mejoras en Inventario: Categorías y Movimientos de Stock.
+- Nombre del proyecto actualizado a Agromaticafy.
