@@ -61,6 +61,26 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="birthday">Fecha de Nacimiento</label>
+                    <input type="date" name="birthday" class="form-control @error('birthday') is-invalid @enderror" id="birthday" value="{{ old('birthday', $customer->birthday) }}">
+                    @error('birthday')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="tags">Etiquetas</label>
+                    <input type="text" name="tags" class="form-control @error('tags') is-invalid @enderror" id="tags" placeholder="VIP, Mayorista" value="{{ old('tags', $customer->tags) }}">
+                    @error('tags')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="phone">Teléfono</label>
                     <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone"
                            placeholder="Teléfono" value="{{ old('phone', $customer->phone) }}">
@@ -77,6 +97,26 @@
                            id="address"
                            placeholder="Dirección" value="{{ old('address', $customer->address) }}">
                     @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notas / Ficha Técnica</label>
+                    <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="notes" placeholder="Notas">{{ old('notes', $customer->notes) }}</textarea>
+                    @error('notes')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="credit_limit">Límite de Crédito</label>
+                    <input type="number" name="credit_limit" class="form-control @error('credit_limit') is-invalid @enderror" id="credit_limit" placeholder="Límite de Crédito" value="{{ old('credit_limit', $customer->credit_limit) }}">
+                    @error('credit_limit')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

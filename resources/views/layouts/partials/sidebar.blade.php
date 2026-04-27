@@ -42,9 +42,27 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="{{ route('cart.index') }}" class="nav-link {{ activeSegment('cart') }}">
+                    <a href="{{ route('pos.modern') }}" class="nav-link {{ activeSegment('pos-modern') }}">
                         <i class="nav-icon fas fa-cash-register"></i>
-                        <p>Sistema POS</p>
+                        <p>POS Moderno <span class="right badge badge-danger">Nuevo</span></p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('cash.register') }}" class="nav-link {{ activeSegment('cash-register') }}">
+                        <i class="nav-icon fas fa-vault"></i>
+                        <p>Control de Caja</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('cart.index') }}" class="nav-link {{ activeSegment('cart') }}">
+                        <i class="nav-icon fas fa-cart-plus"></i>
+                        <p>POS Clásico</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('reports.index') }}" class="nav-link {{ activeSegment('reports') }}">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>Reportes Avanzados</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">

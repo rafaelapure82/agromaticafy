@@ -63,6 +63,7 @@
                     <td>{{$order->created_at}}</td>
                     <td>
                         <a href="{{ route('orders.show', $order) }}" class="btn btn-primary btn-sm"><i class="fas fa-file-invoice"></i> Ver Factura</a>
+                        <button onclick="window.open('{{ route('orders.show', $order) }}', '_blank').print()" class="btn btn-secondary btn-sm"><i class="fas fa-print"></i> Reimprimir</button>
                     </td>
                 </tr>
 

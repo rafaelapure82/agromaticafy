@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CustomerController extends Controller
 {
@@ -59,12 +60,16 @@ class CustomerController extends Controller
             'address' => $request->address,
             'avatar' => $avatar_path,
             'user_id' => $request->user()->id,
+            'notes' => $request->notes,
+            'credit_limit' => $request->credit_limit,
+            'birthday' => $request->birthday,
+            'tags' => $request->tags,
         ]);
 
         if (!$customer) {
-            return redirect()->back()->with('error', 'Sorry, Something went wrong while creating customer.');
+            return redirect()->back()->with('error', 'Lo sentimos, algo salió mal al crear el cliente.');
         }
-        return redirect()->route('customers.index')->with('success', 'Success, New customer has been added successfully!');
+        return redirect()->route('customers.index')->with('success', '¡Éxito, el nuevo cliente ha sido añadido!');
     }
 
     /**
@@ -75,6 +80,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        $orders = $customer->orders()->latest()->paginate(10);
+        return view('customers.show', compact('customer', 'orders'));
     }
 
     /**
@@ -103,6 +110,10 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
+        $customer->notes = $request->notes;
+        $customer->credit_limit = $request->credit_limit;
+        $customer->birthday = $request->birthday;
+        $customer->tags = $request->tags;
 
 
         if ($request->hasFile('avatar')) {
@@ -117,9 +128,9 @@ class CustomerController extends Controller
         }
 
         if (!$customer->save()) {
-            return redirect()->back()->with('error', 'Sorry, Something went wrong while updating the customer.');
+            return redirect()->back()->with('error', 'Lo sentimos, algo salió mal al actualizar el cliente.');
         }
-        return redirect()->route('customers.index')->with('success', 'Success, The customer has been updated.');
+        return redirect()->route('customers.index')->with('success', 'Éxito, el cliente ha sido actualizado.');
     }
 
     public function destroy(Customer $customer)
@@ -133,5 +144,12 @@ class CustomerController extends Controller
        return response()->json([
            'success' => true
        ]);
+    }
+
+    public function report(Customer $customer)
+    {
+        $orders = $customer->orders()->latest()->get();
+        $pdf = Pdf::loadView('customers.report', compact('customer', 'orders'));
+        return $pdf->download('reporte-cliente-' . $customer->id . '.pdf');
     }
 }

@@ -3,7 +3,11 @@
 @section('title', 'Gestión de Productos')
 @section('content-header', 'Gestión de Productos')
 @section('content-actions')
-<a href="{{route('products.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Añadir Nuevo Producto</a>
+    <div class="col-sm-6 text-right">
+        <a href="{{ route('products.export') }}" class="btn btn-secondary"><i class="fas fa-file-export"></i> Exportar</a>
+        <button class="btn btn-info" data-toggle="modal" data-target="#importModal"><i class="fas fa-file-import"></i> Importar</button>
+        <a href="{{ route('products.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Añadir Nuevo Producto</a>
+    </div>
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
@@ -56,6 +60,32 @@
         {{ $products->render() }}
     </div>
 </div><!-- Log on to codeastro.com for more projects -->
+    <!-- Import Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importModalLabel">Importar Productos desde Excel</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="file">Archivo Excel/CSV</label>
+                            <input type="file" name="file" class="form-control-file" id="file" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Importar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')

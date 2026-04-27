@@ -32,6 +32,8 @@ class CustomerStoreRequest extends FormRequest
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string',
             'avatar' => 'nullable|image',
+            'notes' => 'nullable|string',
+            'credit_limit' => 'nullable|numeric',
         ];
     }
 }

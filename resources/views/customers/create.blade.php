@@ -83,6 +83,26 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="notes">Notas / Ficha Técnica</label>
+                    <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" id="notes" placeholder="Notas">{{ old('notes') }}</textarea>
+                    @error('notes')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="credit_limit">Límite de Crédito</label>
+                    <input type="number" name="credit_limit" class="form-control @error('credit_limit') is-invalid @enderror" id="credit_limit" placeholder="Límite de Crédito" value="{{ old('credit_limit', 0) }}">
+                    @error('credit_limit')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="avatar" id="avatar">

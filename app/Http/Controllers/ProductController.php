@@ -7,6 +7,9 @@ use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\StockMovement;
+use App\Imports\ProductsImport;
+use App\Exports\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -171,5 +174,21 @@ class ProductController extends Controller
         return response()->json([
             'success' => true
         ]);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new ProductsImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Productos importados exitosamente.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'productos-' . date('Y-m-d') . '.xlsx');
     }
 }
